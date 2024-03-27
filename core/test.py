@@ -7,7 +7,7 @@ import os
 # OPENAI_API_KEY='sk-xxxx'
 
 
-os.environ['OPENAI_API_KEY'] = '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'
+os.environ['OPENAI_API_KEY'] = 'xx'
 
 from typing import Dict, List, Any
 
