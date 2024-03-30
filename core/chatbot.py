@@ -38,6 +38,6 @@ def chatbot_response(user_input):
     return answer
 
 
-user_input = "how can langsmith help with testing?"
-response = chatbot_response(user_input)
-print(response)
+# user_input = "how can langsmith help with testing?"
+# response = chatbot_response(user_input)
+# print(response)
