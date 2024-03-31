@@ -25,17 +25,3 @@ yarn install
 ```python
 yarn run dev
 ```
-
-## Rebuild/Update Webpage
-1. Change to dir /web-1
-```commandline
-npm run build
-```
-2. Move css and js folder into /static
-```commandline
-mv /dist/css/ /static/css
-mv /dist/js /static/js
-mv /dist/favicon.ico /static
-mv /dist /templates/dist
-```
-3. Run app.py
