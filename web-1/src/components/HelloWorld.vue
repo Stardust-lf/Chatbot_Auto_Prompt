@@ -1,15 +1,23 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-header>Header</el-header>
+      <el-aside width="200px">Aside</el-aside>
       <el-container>
-        <el-aside width="200px">Aside</el-aside>
+        <el-header>Header</el-header>
         <el-main>
           <div class="mainContent">
-            <div class="contentblock"> 
-
-            </div>
-            <el-input v-model="input" style="width: 100%" placeholder="Please input">
+            <el-scrollbar>
+              <div class="contentblock"> 
+                <div v-for="item in messageList" :key="item.id">
+                  <p>问题: {{ item.message }}</p>
+                  <p>回答: {{ item.answer }}</p>
+                </div>
+              </div>
+            </el-scrollbar>
+          </div>
+        </el-main>
+        <el-footer>
+          <el-input v-model="input" style="width: 100%" placeholder="Please input">
               <template #prepend>
                 <el-button :icon="Search" @click="getInput" />
               </template>
@@ -17,8 +25,7 @@
                 <el-button :icon="Search" @click="getInput" />
               </template>
             </el-input>
-          </div>
-        </el-main>
+          </el-footer>
       </el-container>
     </el-container>
   </div>
@@ -26,6 +33,8 @@
 
 <script>
 // import { ref } from 'vue'
+import axios from 'axios';
+
 export default {
   name: 'HelloWorld',
   props: {
@@ -34,11 +43,25 @@ export default {
   data() {
     return{
       input: 'hhhh',
+      messageList: [],
     }
   },
   methods:{
-    getInput(){
-      console.log(this.input)
+    async getInput() {
+      try {
+        const response = await axios.post('/api/getAnswer', { question: this.input });
+        // 假设回答在response.data.answer中
+        this.messageList.push({
+          id: this.messageList.length + 1,
+          message: this.input,
+          answer: response.data.answer
+        });
+        // 清空输入框以便下一次输入
+        this.input = '';
+      } catch (error) {
+        console.error('API调用失败', error);
+        // 处理错误，例如显示错误消息
+      }
     }
   },
 }
