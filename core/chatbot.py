@@ -7,6 +7,9 @@ from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
+
+import core.character
+
 from charater import TechSupportStageAnalyzerChain, HealthAdvisorChain, EducationCounselorChain
 
 current_role = None  # 全局变量，用于存储当前选择的角色
@@ -23,6 +26,8 @@ def choose_role():
     else:
         current_role = role
 
+
+KEY = 'xxx'
 def chatbot_response(user_input):
     global current_role
     if current_role is None:
@@ -32,10 +37,15 @@ def chatbot_response(user_input):
     # Initialize components
     loader = WebBaseLoader("https://docs.smith.langchain.com/user_guide")
     docs = loader.load()
-    embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
+
+    embeddings = OpenAIEmbeddings(openai_api_key=KEY)
+
     text_splitter = RecursiveCharacterTextSplitter()
     documents = text_splitter.split_documents(docs)
     vector = FAISS.from_documents(documents, embeddings)
+
+
+    llm = ChatOpenAI(openai_api_key=KEY)
 
     # 根据当前角色选择相应的链
     if current_role == 'TechSupport':
@@ -44,6 +54,7 @@ def chatbot_response(user_input):
         llm = HealthAdvisorChain.from_llm(embeddings)
     elif current_role == 'EducationCounselor':
         llm = EducationCounselorChain.from_llm(embeddings)
+
 
     output_parser = StrOutputParser()
     prompt = ChatPromptTemplate.from_template("""Answer the following question based only on the provided context:

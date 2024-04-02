@@ -43,4 +43,4 @@ mv /dist/favicon.ico /static
 mv /dist /templates/dist
 ```
 3. Run app.py
->>>>>>> d4f06961 (add main logic)
+
