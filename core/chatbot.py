@@ -7,19 +7,20 @@ from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
-import character
+import core.character
 
+KEY = 'xxx'
 def chatbot_response(user_input):
     openai_api_key = "xxx"
     # Initialize components
     loader = WebBaseLoader("https://docs.smith.langchain.com/user_guide")
     docs = loader.load()
-    embeddings = OpenAIEmbeddings(openai_api_key="openai_api_key")
+    embeddings = OpenAIEmbeddings(openai_api_key=KEY)
     text_splitter = RecursiveCharacterTextSplitter()
     documents = text_splitter.split_documents(docs)
     vector = FAISS.from_documents(documents, embeddings)
 
-    llm = ChatOpenAI(openai_api_key="openai_api_key")
+    llm = ChatOpenAI(openai_api_key=KEY)
     output_parser = StrOutputParser()
     prompt = ChatPromptTemplate.from_template("""Answer the following question based only on the provided context:
 
