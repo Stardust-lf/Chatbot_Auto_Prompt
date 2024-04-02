@@ -1,3 +1,6 @@
+from langchain import LLMChain, PromptTemplate
+from langchain.llms import BaseLLM
+
 #计算机专家
 class TechSupportStageAnalyzerChain(LLMChain):
     """Chain to analyze which conversation stage should the tech support conversation move into."""
