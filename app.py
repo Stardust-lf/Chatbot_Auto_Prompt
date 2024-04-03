@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from flask import render_template
-from core.chatbot import chatbot_response
-import requests
+from core.simplebot import get_answer_with_char
+from core.char_prompt import COMPUTER_EXPERT, WRITER
 
 app = Flask(__name__)
 
@@ -18,7 +18,9 @@ def get_response():
     question = request.json.get('question')
 
     print('Q',question)
-    response = chatbot_response(question)
+    #response = chatbot_response(question)
+    response = get_answer_with_char(question, char_prompt=WRITER, sorce_dir='sources/story.txt')
+
     print('Ans:', response)
     return jsonify({'answer': response})
 
