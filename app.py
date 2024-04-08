@@ -16,10 +16,12 @@ def index():
 def get_response():
 
     question = request.json.get('question')
+    char_prompt_para = request.json.get('optionsPara')
 
     print('Q',question)
+    print('role',char_prompt_para)
     #response = chatbot_response(question)
-    response = get_answer_with_char(question, char_prompt=WRITER, sorce_dir='sources/story.txt')
+    response = get_answer_with_char(question, char_prompt=char_prompt_para, sorce_dir='sources/story.txt')
 
     print('Ans:', response)
     return jsonify({'answer': response})

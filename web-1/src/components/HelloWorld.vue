@@ -1,9 +1,20 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-aside class="aside-with-image" width="200px"></el-aside>
+      <el-aside class="aside-with-image" width="200px">
+        <el-select v-model="value" placeholder="请选择角色">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+      </el-aside>
       <el-container>
-        <el-header class="header-with-image" >Chatbot Auto Prompt</el-header>
+        <el-header class="header-with-image" >Chatbot Auto Prompt
+
+        </el-header>
         <el-main>
           <div class="mainContent">
             <el-scrollbar>
@@ -44,6 +55,17 @@ export default {
     return{
       input: 'hhhh',
       messageList: [],
+      options: [{
+          value: 'COMPUTER_EXPERT',
+          label: 'default setting'
+        }, {
+          value: 'WRITER',
+          label: 'writer'
+        }, {
+          value: 'COMPUTER_EXPERT',
+          label: 'computer expert'
+        }],
+        value: 'COMPUTER_EXPERT'
     }
   },
   methods:{
@@ -52,7 +74,9 @@ export default {
     },
     async getInput() {
       try {
-        const response = await axios.post('/api/getAnswer', { question: this.input });
+        const response = await axios.post('/api/getAnswer', { 
+          question: this.input,
+          optionsPara: this.value });
         // 假设回答在response.data.answer中
         this.messageList.push({
           id: this.messageList.length + 1,
