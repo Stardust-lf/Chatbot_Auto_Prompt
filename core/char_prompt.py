@@ -25,3 +25,8 @@ COMPUTER_EXPERT = """
 Your answer should start with the translated version of \"As a programmer: here is my opinion\"
 """
 
+PROMPT_ENGINEER = """
+Modify this prompt and help me create a character of xxx
+"""
+
+

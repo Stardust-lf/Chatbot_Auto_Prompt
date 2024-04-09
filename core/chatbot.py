@@ -1,4 +1,5 @@
 from langchain_openai import ChatOpenAI
+import sys
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_community.document_loaders import WebBaseLoader
@@ -13,14 +14,13 @@ from core.character import TechSupportStageAnalyzerChain, HealthAdvisorChain, Ed
 
 current_role = None  # Global variable to store the current role
 
-KEY = 'xxx'
 
-def chatbot_response(user_input, current_role = 'TechSupport'):
+def chatbot_response(user_input, current_role = 'TechSupport', key = 'xxx'):
     # Initialize components
     loader = WebBaseLoader("https://docs.smith.langchain.com/user_guide")
     docs = loader.load()
 
-    embeddings = OpenAIEmbeddings(openai_api_key=KEY)
+    embeddings = OpenAIEmbeddings(openai_api_key=key)
 
     text_splitter = RecursiveCharacterTextSplitter()
     documents = text_splitter.split_documents(docs)
@@ -28,11 +28,11 @@ def chatbot_response(user_input, current_role = 'TechSupport'):
 
     # Select the appropriate chain based on the current role
     if current_role == 'TechSupport':
-        llm = TechSupportStageAnalyzerChain.from_llm(llm=OpenAI(openai_api_key = KEY))
+        llm = TechSupportStageAnalyzerChain.from_llm(llm=OpenAI(openai_api_key = key))
     elif current_role == 'HealthAdvisor':
-        llm = HealthAdvisorChain.from_llm(llm=OpenAI(openai_api_key = KEY))
+        llm = HealthAdvisorChain.from_llm(llm=OpenAI(openai_api_key = key))
     elif current_role == 'EducationCounselor':
-        llm = EducationCounselorChain.from_llm(llm=OpenAI(openai_api_key = KEY))
+        llm = EducationCounselorChain.from_llm(llm=OpenAI(openai_api_key = key))
     else:
         raise ValueError(f"Invalid role: {current_role}")
 

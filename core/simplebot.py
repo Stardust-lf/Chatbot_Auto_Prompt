@@ -10,7 +10,7 @@ from langchain_openai import ChatOpenAI
 from core.utils import txt_to_string
 
 
-os.environ["OPENAI_API_KEY"] = 'xxx'
+
 
 def get_answer_with_char(question, char_prompt, sorce_dir):
     model = ChatOpenAI(model="gpt-3.5-turbo-0125")
