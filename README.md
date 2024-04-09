@@ -2,7 +2,7 @@
 A chatbot with auto-generated prompt
 
 
-## web
+## Web Development
 1. install Nodejs
 ```python
 # Ubuntu directly install node 14
@@ -11,36 +11,38 @@ sudo apt-get install -y nodejs
 ```
 
 2. install yarn
-```python
+```commandline
 npm install --global yarn
 ```
 
-3. 首先进入项目目录web-1, 安装前端项目依赖
+3. Install packages
 
-```python
+```commandline
+cd web-1
 yarn install
 ```
 
-4. 运行前端项目
-```python
-<<<<<<< HEAD
+4. Debug/Run the UI part
+```commandline
 yarn run dev
-```
-=======
 yarn run serve
 ```
 
-## Rebuild/Update Webpage
-1. Change to dir /web-1
+## Rebuild/Update Whole Website
+1. Rebuild
 ```commandline
+cd web-1
 npm run build
 ```
 2. Move css and js folder into /static
 ```commandline
-mv /dist/css/ /static/css
+mv /dist/css /static/css
 mv /dist/js /static/js
 mv /dist/favicon.ico /static
 mv /dist /templates/dist
 ```
-3. Run app.py
+3. Run site script with OPENAI-KEY
+```commandline
+python app.py YOUR_OPEN_AI_KEY
+```
 
