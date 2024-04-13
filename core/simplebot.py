@@ -21,10 +21,11 @@ def get_answer_with_char(question, char_prompt, sorce_dir):
     )
     retriever = vectorstore.as_retriever()
     template = char_prompt + """Answer the question based only on the following context:
-    {context}, in Simplified Chinese
+    {context}, in English
     
     Question: {question}
     """
+    print('Q', template)
     prompt = ChatPromptTemplate.from_template(template)
     output_parser = StrOutputParser()
 
