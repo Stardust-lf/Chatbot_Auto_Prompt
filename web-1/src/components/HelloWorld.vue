@@ -20,8 +20,8 @@
             <el-scrollbar>
               <div class="contentblock"> 
                 <div v-for="item in messageList" :key="item.id" class="message">
-                  <p class="question">问题: {{ item.message }}</p>
-                  <p class="answer">回答: {{ item.answer }}</p>
+                  <p class="question">Question: {{ item.message }}</p>
+                  <p class="answer">Answer: {{ item.answer }}</p>
                 </div>
               </div>
             </el-scrollbar>
