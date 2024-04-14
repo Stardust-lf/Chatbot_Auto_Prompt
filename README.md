@@ -1,6 +1,10 @@
 # Chatbot_Auto_Prompt
 A chatbot with auto-generated prompt
 
+## Run Sofeware Directly
+```commandline
+python app.py YOUR_OPEN_AI_KEY
+```
 
 ## Web Development
 1. install Nodejs
